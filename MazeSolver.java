@@ -47,6 +47,12 @@ public class MazeSolver{
         this.start = start;
         this.goal = goal;
         this.maze = maze;
+        this.solution = null;
+    }
+
+    public boolean hasAccurateSolution(){
+        if(solution == null) return false;
+        return solution.getX() == goal[0] && solution.getY() == goal[1];
     }
 
     public void printSolutionPath(PrintStream output){
@@ -96,13 +102,15 @@ public class MazeSolver{
         return annotatedMaze;
     }
 
-    public boolean solve(){
+    public void solve(){
         ExpansionList goalNode = new ExpansionList(goal[0], goal[1], 0, goal, null, ' ');
         ExpansionList current = new ExpansionList(start[0], start[1], 0, goal, null, ' ');
         PriorityQueue<ExpansionList> open = new PriorityQueue<ExpansionList>();
         HashSet<ExpansionList> explored = new HashSet<ExpansionList>();
 
-        while(!current.equals(goalNode)){
+        open.add(current);
+
+        while(!open.isEmpty() && !current.equals(goalNode)){
             //Up
             if(current.getY() > 0){
                 ExpansionList node = new ExpansionList(
@@ -167,9 +175,7 @@ public class MazeSolver{
             current = open.poll();
         }
 
-            this.solution = current;
-            return true;
-
+        this.solution = current;
     }
 
 }

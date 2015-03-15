@@ -13,7 +13,7 @@ public class MazeTest {
         int[][] maze =
                 {
                         {0,1,0,0,0,0,1,0,1,0},
-                        {0,1,0,1,0,1,0,0,0,0},
+                        {0,1,0,1,0,1,0,0,1,0},
                         {0,0,0,0,0,0,1,0,1,0},
                         {0,1,0,1,0,1,0,0,1,0},
                         {1,0,0,0,0,0,0,0,1,0},
@@ -22,17 +22,12 @@ public class MazeTest {
                         {0,1,0,0,0,0,1,0,0,0}
                 };
         MazeSolver solver = new MazeSolver(start, goal, maze);
-        if(solver.solve()) {
-            //solver.printSolutionPath(System.out);
+        solver.solve();
 
-            char[][] annotatedMaze = solver.annotatedMaze();
-            for (char[] array : annotatedMaze) {
-                System.out.println(Arrays.toString(array));
-            }
+        char[][] annotatedMaze = solver.annotatedMaze();
+        for (char[] array : annotatedMaze) {
+            System.out.println(Arrays.toString(array));
         }
-        else{
-            System.out.println("No Solution");
-        }
-
+        if(!solver.hasAccurateSolution()) System.out.println("No Solution");
     }
 }
