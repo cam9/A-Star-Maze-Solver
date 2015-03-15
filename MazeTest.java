@@ -12,17 +12,19 @@ public class MazeTest {
         int[] goal = {9,4};
         int[][] maze =
                 {
-                        {0,1,0,0,0,0,1,0,1,0},
+                        {0,1,0,0,0,0,0,0,1,0},
                         {0,1,0,1,0,1,0,0,1,0},
                         {0,0,0,0,0,0,1,0,1,0},
                         {0,1,0,1,0,1,0,0,1,0},
-                        {1,0,0,0,0,0,0,0,1,0},
+                        {1,0,0,0,0,1,0,0,1,0},
                         {1,0,0,1,0,1,0,0,1,0},
                         {0,0,0,1,1,0,1,0,1,0},
                         {0,1,0,0,0,0,1,0,0,0}
                 };
         MazeSolver solver = new MazeSolver(start, goal, maze);
+        long startT = System.currentTimeMillis();
         solver.solve();
+        System.out.println(System.currentTimeMillis()-startT);
 
         char[][] annotatedMaze = solver.annotatedMaze();
         for (char[] array : annotatedMaze) {
